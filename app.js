@@ -3,7 +3,7 @@ const cors = require('cors');
 
 const errorNotFound = { error: 'id.not_found' };
 let nextId = 1;
-const posts = [
+let posts = [
     { id: nextId++, content: 'First post', likes: 0 },
     { id: nextId++, content: 'Second post', likes: 0 },
 ];
@@ -12,8 +12,8 @@ server.use(express.json());
 server.use(cors());
 
 function findPostIndexById(id) {
-    return posts.findIndex( o => o.id === id)
-    
+    return posts.findIndex(o => o.id === id)
+
 }
 server.get('/posts', (req, res) => {
     res.send(posts);
@@ -39,20 +39,16 @@ server.post('/posts', (req, res) => {
     posts[index].content = body.content;
     res.send(posts);
 });
-
+// Для удаления постов используем метод filter
 server.delete('/posts/:id', (req, res) => {
+
     const id = Number(req.params.id);
-    const index = findPostIndexById(id);
-    if (index === -1) {
-        res.status(404).send(errorNotFound);
-        return;
-    }
-    posts.splice(index , 1);
+    posts = posts.filter(o => o.id != id);
     res.send(posts);
 });
 
 // Лайки отправляются на сервер(чтобы их получить нужно обновить страницу)
-server.post('/posts/:id/likes' , (req, res) => {
+server.post('/posts/:id/likes', (req, res) => {
     const id = Number(req.params.id);
     const index = findPostIndexById(id);
     if (index === -1) {
@@ -64,7 +60,7 @@ server.post('/posts/:id/likes' , (req, res) => {
 });
 
 // Убирает количество лайков с нашего сервера( Лайки отправляются на сервер(чтобы их получить нужно обновить страницу))
-server.delete('/posts/:id/likes' , (req, res) => {
+server.delete('/posts/:id/likes', (req, res) => {
     const id = Number(req.params.id);
     const index = findPostIndexById(id);
     if (index === -1) {
