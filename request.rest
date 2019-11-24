@@ -1,4 +1,5 @@
-@host = http://localhost:9999
+# @host = http://localhost:9999
+@host = https://expressapisecond.herokuapp.com
 ###
 GET {{host}}/posts
 
