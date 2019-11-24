@@ -35,11 +35,7 @@ server.post('/posts', (req, res) => {
     posts = posts.map(o => {
         if (o.id !== id) {
             return o;
-        }; return {
-            id: o.id,
-            content: body.content,
-            likes: o.likes,
-        };
+        }; return {...o, content:body.content}//Использование оператора spread ...
     });
     
     res.send(posts);
