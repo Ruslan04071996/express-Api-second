@@ -22,3 +22,10 @@ Content-Type: application/json
 
 ###
 DELETE {{host}}/posts/1
+
+
+###
+POST {{host}}/posts/1/likes
+
+### 
+DELETE {{host}}/posts/1/likes
