@@ -32,11 +32,7 @@ server.post('/posts', (req, res) => {
         res.send(posts);
         return;
     }
-    posts = posts.map(o => {
-        if (o.id !== id) {
-            return o;
-        }; return {...o, content:body.content}//Использование оператора spread ...
-    });
+    posts = posts.map(o => o.id !== id ? o : {...o, content:body.content});//Использование метода спред , тернарного оператора вместо иф и если у нас только один аргумето , то опускаем return
     
     res.send(posts);
 });
