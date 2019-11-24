@@ -19,9 +19,11 @@ server.get('/posts', (req, res) => {
     res.send(posts);
 });
 
+// Для обновления постов используем метод map
 server.post('/posts', (req, res) => {
     const body = req.body;
-    if (body.id === 0) {
+    const id = body.id;
+    if (id === 0) {
         posts.push({
             id: nextId++,
             content: body.content,
@@ -30,13 +32,16 @@ server.post('/posts', (req, res) => {
         res.send(posts);
         return;
     }
-    const index = findPostIndexById(body.id);
-    if (index === -1) {
-        res.status(404).send(errorNotFound);
-        return;
-    }
-
-    posts[index].content = body.content;
+    posts = posts.map(o => {
+        if (o.id !== id) {
+            return o;
+        }; return {
+            id: o.id,
+            content: body.content,
+            likes: o.likes,
+        };
+    });
+    
     res.send(posts);
 });
 // Для удаления постов используем метод filter

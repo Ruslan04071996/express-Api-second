@@ -18,7 +18,7 @@ Content-Type: application/json
 
 {
     "id": 1,
-    "content": "Updates Post"
+    "content": "Updated Post"
 }
 
 ###
