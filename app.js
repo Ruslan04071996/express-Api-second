@@ -51,7 +51,7 @@ server.delete('/posts/:id', (req, res) => {
     res.send(posts);
 });
 
-// Лайки отправляются на сервер
+// Лайки отправляются на сервер(чтобы их получить нужно обновить страницу)
 server.post('/posts/:id/likes' , (req, res) => {
     const id = Number(req.params.id);
     const index = findPostIndexById(id);
@@ -63,7 +63,7 @@ server.post('/posts/:id/likes' , (req, res) => {
     res.send(posts)
 });
 
-// Убирает количество лайков с нашего сервера
+// Убирает количество лайков с нашего сервера( Лайки отправляются на сервер(чтобы их получить нужно обновить страницу))
 server.delete('/posts/:id/likes' , (req, res) => {
     const id = Number(req.params.id);
     const index = findPostIndexById(id);
