@@ -1,5 +1,5 @@
-@host = http://localhost:9999
-# @host = https://expressapisecond.herokuapp.com
+# @host = http://localhost:9999
+@host = https://expressapisecond.herokuapp.com/posts
 ###
 GET {{host}}/posts
 
